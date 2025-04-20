@@ -15,7 +15,7 @@ public class TaskService(List<Task> tasks)
     {
         tasks.RemoveAt(i - 1);
     }
-    public void UpdateTaskTitle(int i, string Title)
+    public void UpdateTaskTitle(int i , string Title)
     {
         tasks[i - 1].Title = Title;
     }

@@ -76,17 +76,62 @@ while (true)
                         n = int.Parse(Console.ReadLine());
                     }catch
                     {
-                        System.Console.WriteLine("Type valid number between 1 and 4!:");
+                        System.Console.WriteLine($"Type valid number between 1 and {tasks[tasks.Count - 1].Id}!");
                         n = 0;
                     }
-                } while(n < 1 || n > tasks[tasks.Count].Id);
-                System.Console.Write("Enter the new title: ");
-                Title = Console.ReadLine();
-                if(Title != null){
-                    taskService.UpdateTaskTitle(n, Title);
-                    System.Console.WriteLine("Task updated successfully!");
-                    break;
+                } while(n < 1 || n > tasks[tasks.Count - 1].Id);
+                Console.WriteLine("\t 1. Update Title:");
+                Console.WriteLine("\t 2. Update Status:");
+                int i;
+                do 
+                {
+                    try
+                    {
+                        Console.Write("Choose what to update: ");
+                        i = int.Parse(Console.ReadLine());
+                    }catch
+                    {
+                        System.Console.WriteLine($"Choose valid number 1 or 2!");
+                        i = 0;
+                    }
+                } while(i != 1 && i != 2);
+
+                if(i == 1){
+                    System.Console.Write("Enter the new title: ");
+                    System.Console.WriteLine(n);
+                    Title = Console.ReadLine();
+                    if(Title != null){
+                        taskService.UpdateTaskTitle(n, Title);
+                        System.Console.WriteLine("Task updated successfully!");
+                        break;
+                    }
                 }
+                else 
+                {
+                    Console.WriteLine("\t\t 1. Check Done");
+                    Console.WriteLine("\t\t 2. Uncheck Done");
+                    do 
+                    {
+                        try
+                        {
+                            Console.Write("Check or uncheck Done to task: ");
+                            i = int.Parse(Console.ReadLine());
+                        }catch
+                        {
+                            System.Console.WriteLine($"Choose valid number 1 or 2!");
+                            i = 0;
+                        }
+                    } while(i != 1 && i != 2);
+                }
+                if(i == 1)
+                {
+                   taskService.TaskIsDone(n, true);
+                }else
+                {
+                    taskService.TaskIsDone(n, false);
+                }
+                System.Console.WriteLine("Task updated successfully!");
+                break;
             }
             break;
 
